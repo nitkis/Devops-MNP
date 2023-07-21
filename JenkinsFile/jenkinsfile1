@@ -3,7 +3,7 @@ pipeline {
     stages{
 		stage ("create user") {
 			steps {
-				sh "sudo useradd my-user"
+				sh "sudo useradd my-user1"
 				}
 			}
 		stage ("list all users on home path") {
@@ -14,35 +14,47 @@ pipeline {
 			
 		stage ("create a directory") {
             steps {
-                sh "sudo mkdir /tmp/pipeline1"
+                sh "sudo mkdir /tmp/pipeline2"
             }
         }
 		
         stage ("creating a file") {
                  steps {
                     sh '''
-                    sudo touch /tmp/pipeline1/test1.txt
-                    sudo chown -R jenkins:jenkins /tmp/pipeline1
-                    sudo chmod -R 775 /tmp/pipeline1
-                    sudo echo "Hi, we are learning devops in MNP. And MNP is a nice place to learn new tech" >> /tmp/pipeline1/test1.txt
+                    sudo touch /tmp/pipeline2/test1.txt
+                    sudo chown -R jenkins:jenkins /tmp/pipeline2
+                    sudo chmod -R 775 /tmp/pipeline2
+                    sudo echo "Hi, we are learning devops in MNP. And MNP is a nice place to learn new tech" >> /tmp/pipeline2/test1.txt
                     '''
                  }
             }
 		stage ("display file before replacing the word") {
 			steps {
-				sh "cat /tmp/pipeline1/test1.txt"
+				sh "cat /tmp/pipeline2/test1.txt"
 				}
 		}
 		stage ("replacing MNP with MNPTech") {
 			steps {
-			sh "sudo sed 's/MNP/MNPTech/g' /tmp/pipeline1/test1.txt >> /tmp/pipeline1/test2.txt"
+			sh "sudo sed 's/MNP/MNPTech/g' /tmp/pipeline2/test1.txt >> /tmp/pipeline2/test2.txt"
 			}
 		
 		}
 		stage ("display the new file after replacing the word in old file") {
 			steps {
-				sh "cat /tmp/pipeline1/test2.txt"
+				sh "cat /tmp/pipeline2/test2.txt"
 				}
+		}
+		
+		stage ("build status") {
+			steps {
+				sh '''
+				if (currentBuild.currentResult == "SUCCESS") {
+				sudo echo "success"
+				}
+				else
+				sudo echo "failed"
+				'''
+			}
 		}
 	}
 }
