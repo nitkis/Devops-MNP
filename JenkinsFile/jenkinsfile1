@@ -1,0 +1,11 @@
+pipeline {
+	agent {label "mnp-app-slave"}
+	stages {
+		stage ("hello jenkins") {
+			steps {
+				sh "sudo ls -la /home"
+		}
+	}
+		
+	}
+}
