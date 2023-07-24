@@ -25,7 +25,7 @@ pipeline {
 					script {
 					echo "execution ended"
 					def now1 = new Date()
-					println now1.format("ddmmyyyy:HHmm", TimeZone.getTimeZone('IST'))
+					println now1.format("ddMMyyyy:HHmm", TimeZone.getTimeZone('IST'))
 					}
 				}
 			}
