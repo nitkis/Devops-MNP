@@ -1,0 +1,15 @@
+pipeline {
+		agent any
+		stages {
+			stage("hello Jenkins") {
+				steps {
+					sh "sudo ls /home"
+					}
+				}
+			stage("displaying build number of particular job") {
+				steps {
+					sh "sudo echo $JOB_NAME and $BUILD_NUMBER"
+					}
+				}
+			}
+}
