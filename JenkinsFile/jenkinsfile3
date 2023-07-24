@@ -1,16 +1,34 @@
 pipeline {
 	agent {label "mnp-app-slave"}
 		stages {
+			stage("build starting") {
+				steps {
+					script {
+                    			echo "execution started"
+					def now = new Date()
+                    			println now.format("yyyyMMdd:HHmm", TimeZone.getTimeZone('IST'))
+                   		 }
+				}
+			}
 			stage("hello Jenkins") {
 				steps {
 					sh "sudo ls -l /home"
 					}
 				}
-			stage("displaying build number of particular job") {
+			stage("displaying build number of particular job with date time") {
 				steps {
 					sh "sudo echo job name is : $JOB_NAME and build number is : $BUILD_NUMBER and it started at TimeStamp: ${currentBuild.startTimeInMillis}"
 					}
 				}
+			stage("build ending") {
+				steps {
+					script {
+					echo "execution ended"
+					def now1 = new Date()
+					println now1.format("ddmmyyyy:HHmm", TimeZone.getTimeZone('IST'))
+					}
+				}
 			}
+	}
 }
 
