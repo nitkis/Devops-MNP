@@ -8,8 +8,9 @@ pipeline {
 				}
 			stage("displaying build number of particular job") {
 				steps {
-					sh "sudo echo $JOB_NAME and $BUILD_NUMBER"
+					sh "sudo echo job name is : $JOB_NAME and build number is : $BUILD_NUMBER and it started at TimeStamp: ${currentBuild.startTimeInMillis}"
 					}
 				}
 			}
 }
+
