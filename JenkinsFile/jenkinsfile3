@@ -3,7 +3,7 @@ pipeline {
 		stages {
 			stage("hello Jenkins") {
 				steps {
-					sh "sudo ls /home"
+					sh "sudo ls -l /home"
 					}
 				}
 			stage("displaying build number of particular job") {
